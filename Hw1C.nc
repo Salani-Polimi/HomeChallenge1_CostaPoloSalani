@@ -75,13 +75,12 @@ implementation {
  
 
   message_t packet; //packet variable
+  //booleans used to control the leads
   bool mote1=TRUE;
   bool mote2=TRUE;
   bool mote3=TRUE;
   bool locked;
   uint16_t counter = 0; // counter max 16 bytes variable
-  
- 
   
   event void Boot.booted() {
     call AMControl.start(); //starts the radio
@@ -107,13 +106,11 @@ implementation {
   }
   
 
-  
   event void AMControl.stopDone(error_t err) {
     // do nothing
   }
   //everytime the timer is fired we send a message
   event void Timer0.fired() {
-    //counter++; 
     dbg("Hw1C", "Hw1C: timer fired, counter is %hu.\n", counter);
     if (locked) {
       return;
@@ -138,7 +135,6 @@ implementation {
     
   }
   event void Timer1.fired() {
-    //counter++; 
     dbg("Hw1C", "Hw1C: timer fired, counter is %hu.\n", counter);
     if (locked) {
       return;
@@ -162,8 +158,7 @@ implementation {
     }
     
   }
-  event void Timer2.fired() {
-    //counter++; 
+  event void Timer2.fired() { 
     dbg("Hw1C", "Hw1C: timer fired, counter is %hu.\n", counter);
     if (locked) {
       return;
